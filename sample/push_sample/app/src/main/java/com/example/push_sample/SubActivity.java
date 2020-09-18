@@ -1,11 +1,18 @@
 package com.example.push_sample;
 
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -13,6 +20,24 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 public class SubActivity extends AppCompatActivity {
+    String test,test2;
+    TextView textView,textView2;
+    Button button;
+    BroadcastReceiver mBR;
+    static String str = "";
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e("ttt","onNewIntent() !");
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("ttt","onresume() !");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +45,29 @@ public class SubActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub);
 
         final String TAG="TEST01";
+
+        textView = findViewById(R.id.textView);
+        textView2 = findViewById(R.id.textView2);
+        button = findViewById(R.id.button);
+
+        Intent secondIntent = getIntent();
+        test = secondIntent.getStringExtra("message");
+        test2 = secondIntent.getStringExtra("custom");
+
+        textView.setText(test);
+        textView2.setText(test2);
+
+        Intent intent = new Intent("woww");
+        intent.putExtra("hello","kk");
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 테스트용 토큰 수령
         FirebaseInstanceId.getInstance().getInstanceId()

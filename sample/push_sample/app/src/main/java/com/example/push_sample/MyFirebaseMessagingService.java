@@ -3,12 +3,20 @@ package com.example.push_sample;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -17,86 +25,69 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-    String TAG = "ttt";
+public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    BroadcastReceiver receiver;
+    private static final String TAG = "ttt";
 
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Map<String, String> params = remoteMessage.getData();
-        JSONObject object = new JSONObject(params);
-        Log.d(TAG, "received data : " + object.toString());
-        if (remoteMessage != null) {
-            Log.d(TAG, remoteMessage.toString());
-            try {
-                String key = remoteMessage.getData().keySet().iterator().next();
-                JSONObject jo = new JSONObject(remoteMessage.getData().get(key));
-                Log.d(TAG, "received data : " + jo.toString());
+        super.onMessageReceived(remoteMessage);
 
-                String id = jo.getString("message");
-                String title = jo.getString("title");
-                String activity =  jo.getString("activity");
+        // 앱이 onResume일 때만 일로 들어온다.
 
-                BoardItem item = new BoardItem(id, title, activity);
+        Log.d("ttt","receive_on");
 
-                new NotificationManagerr(this).makeNotification(item);
+        //Handle FCM Message
+        Log.e(TAG, remoteMessage.getFrom());
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Log.e("pushMessage", "error Josn: " + remoteMessage.getData()
-                        .get(remoteMessage.getData().keySet().iterator().next()));
-            } catch (Exception e){
-                //
+        // check if message contains a data payload
+        if (remoteMessage.getData().size() > 0) {
+            Log.e(TAG,  "message data payload: "+remoteMessage.getData());
+
+            handleNow();
+        }
+
+        // Check if message contains a notification payload
+        if (remoteMessage.getNotification() != null) {
+            Log.e(TAG, "Message Notification Title: "+ remoteMessage.getNotification().getTitle());
+            Log.e(TAG, "Message Notification Body: "+ remoteMessage.getNotification().getBody());
+            Log.e(TAG, "Message Notification clickAction: "+ remoteMessage.getNotification().getClickAction());
+            Log.e(TAG, "Message Notification form: "+ remoteMessage.getFrom());
+            Log.e(TAG, "Message Notification custom: "+ remoteMessage.getData().get("custom"));
+
+            String isBody = remoteMessage.getNotification().getBody();
+            String getCustom = remoteMessage.getData().get("custom");
+            if (TextUtils.isEmpty(isBody)) {
+                Log.e(TAG,"ERR: Message data is empty...");
+            } else {
+
+                // Broadcast Data Sending Test
+//                Intent intent = new Intent("alert_data");
+//                intent.putExtra("custom",getCustom);
+//                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             }
         }
     }
 
-    private void sendNotification(RemoteMessage remoteMessage) {
-        String title = remoteMessage.getData().get("title");
-        String message = remoteMessage.getData().get("message");
-
-        final String CHANNEL_ID = "ChannerID";
-        NotificationManager mManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final String CHANNEL_NAME = "ChannerName";
-            final String CHANNEL_DESCRIPTION = "ChannerDescription";
-            final int importance = NotificationManager.IMPORTANCE_HIGH;
-
-            // add in API level 26
-            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance);
-            mChannel.setDescription(CHANNEL_DESCRIPTION);
-            mChannel.enableLights(true);
-            mChannel.enableVibration(true);
-            mChannel.setVibrationPattern(new long[]{100, 200, 100, 200});
-            mChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-            mManager.createNotificationChannel(mChannel);
-        }
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-        builder.setSmallIcon(R.drawable.common_google_signin_btn_icon_light_normal);
-        builder.setAutoCancel(true);
-        builder.setDefaults(Notification.DEFAULT_ALL);
-        builder.setWhen(System.currentTimeMillis());
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle(title);
-        builder.setContentText(message);
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            builder.setContentTitle(title);
-            builder.setVibrate(new long[]{500, 500});
-        }
-        mManager.notify(0, builder.build());
+    private void handleNow() {
+        Log.d(TAG, "Short lived task is done.");
     }
+
+    /*  새로운 토큰이 생성되는 경우 */
 
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.d(TAG, "token[" + s + "]" );
-        /*
-         * 기존의 FirebaseInstanceIdService에서 수행하던 토큰 생성, 갱신 등의 역할은 이제부터
-         * FirebaseMessaging에 새롭게 추가된 위 메소드를 사용하면 된다.
-         */
+        Log.e(TAG, "token[" + s + "]" );
+        sendRegistrationToServer(s);
+    }
+
+    private void sendRegistrationToServer(String token) {
+        Log.e(TAG,"here! sendRegistrationToServer! token is "+token);
     }
 
 
