@@ -20,7 +20,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 public class SubActivity extends AppCompatActivity {
-    String test,test2;
+    String msg,cust;
     TextView textView,textView2;
     Button button;
     BroadcastReceiver mBR;
@@ -51,14 +51,15 @@ public class SubActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         Intent secondIntent = getIntent();
-        test = secondIntent.getStringExtra("message");
-        test2 = secondIntent.getStringExtra("custom");
+        msg = secondIntent.getStringExtra("message");
+        cust = secondIntent.getStringExtra("custom");
 
-        textView.setText(test);
-        textView2.setText(test2);
+        textView.setText(msg);
+        textView2.setText(cust);
 
         Intent intent = new Intent("woww");
-        intent.putExtra("hello","kk");
+        intent.putExtra("message",msg);
+        intent.putExtra("custom",cust);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
         button.setOnClickListener(new View.OnClickListener() {

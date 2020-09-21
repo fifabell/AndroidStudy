@@ -37,8 +37,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        // 앱이 onResume일 때만 일로 들어온다.
-
         Log.d("ttt","receive_on");
 
         //Handle FCM Message
