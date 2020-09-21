@@ -67,14 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-;
-
-
-
-
     }
-
-
 
     BroadcastReceiver mBR = new BroadcastReceiver() {
         @Override
