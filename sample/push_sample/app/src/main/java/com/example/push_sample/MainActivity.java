@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             // ui변경안됨.
-            String data = intent.getStringExtra("hello");
+            String data1 = intent.getStringExtra("message");
+            String data2 = intent.getStringExtra("custom");
+            String data = data1 + data2;
             Log.d("ttt",data);
             str = data;
             textView.setText(data);
