@@ -21,20 +21,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     Button button;
     TextView textView;
-    static String str = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        init();
+
         textView = findViewById(R.id.textView);
-        textView.setText(str);
-        registerReceiver();
+        Log.d("ttt","main..msg"+mMsg);
+        textView.setText("from Broad:"+ mMsg);
 
         final String TAG="TEST01";
         Log.d("tttt",";;");
@@ -63,32 +63,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),SubActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
 
     }
 
-    BroadcastReceiver mBR = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // ui변경안됨.
-            String data1 = intent.getStringExtra("message");
-            String data2 = intent.getStringExtra("custom");
-            String data = data1 + data2;
-            Log.d("ttt",data);
-            str = data;
-            textView.setText(data);
-        }
-    };
-
-    private void registerReceiver() {
-        LocalBroadcastManager.getInstance(this)
-                .registerReceiver(mBR, new IntentFilter("woww"));
-//        IntentFilter theFilter = new IntentFilter();
-//        String id = "woww";
-//        theFilter.addAction(id);
-//        this.registerReceiver(this.mBR, theFilter);
+    private void init() {
+        setBackPressDoubleClick(true);
     }
 
 }

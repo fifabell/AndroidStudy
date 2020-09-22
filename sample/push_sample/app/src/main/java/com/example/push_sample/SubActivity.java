@@ -1,6 +1,7 @@
 package com.example.push_sample;
 
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -19,12 +20,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
-public class SubActivity extends AppCompatActivity {
-    String msg,cust;
-    TextView textView,textView2;
+public class SubActivity extends BaseActivity {
+    String message;
+    TextView textView;
     Button button;
-    BroadcastReceiver mBR;
     static String str = "";
+    BroadcastReceiver mBR;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -47,25 +48,32 @@ public class SubActivity extends AppCompatActivity {
         final String TAG="TEST01";
 
         textView = findViewById(R.id.textView);
-        textView2 = findViewById(R.id.textView2);
         button = findViewById(R.id.button);
 
-        Intent secondIntent = getIntent();
-        msg = secondIntent.getStringExtra("message");
-        cust = secondIntent.getStringExtra("custom");
+        //Intent secondIntent = getIntent();
+        //message = getIntent().getStringExtra("message");
+        //Log.d("ttt: ","getIntentsubM: "+message);
 
-        textView.setText(msg);
-        textView2.setText(cust);
+        Log.d("ttt","sub..msg"+mMsg);
 
-        Intent intent = new Intent("woww");
-        intent.putExtra("message",msg);
-        intent.putExtra("custom",cust);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        str = mMsg;
+        textView.setText("from Broad:"+ mMsg);
+//        mBR = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                // ui변경안됨.
+//                String data = intent.getStringExtra("inBroadMessage");
+//                Log.d("ttt","getReceiveData2: "+data);
+//                str = data;
+//                textView.setText("from Broad:"+ data);
+//            }
+//        };
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -89,4 +97,6 @@ public class SubActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
