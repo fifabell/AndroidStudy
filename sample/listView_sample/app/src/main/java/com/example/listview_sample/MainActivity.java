@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // 리스트뷰와 리스트를 연결하기 위해 사용되는 어댑터.
         // 어댑터에 리스트를 먼저 담는다.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, list);
+                android.R.layout.simple_list_item_1, list); // 내장되어있는 item list사용.
 
         // 리스트뷰에 어댑터를 지정해준다.
         listView.setAdapter(adapter);

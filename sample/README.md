@@ -1,0 +1,1 @@
+[fragment](https://developer.android.com/guide/components/fragments?hl=ko)

@@ -5,13 +5,14 @@ package com.example.listview_sample;
  * 문제있음 . 찾아볼 것.
  * */
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,37 +28,56 @@ public class MainActivity2 extends AppCompatActivity {
     private Button button;
     private TextView textView2;
     private ListView listView;
+    private LinearLayout linearLayout;
+    private Context context;
+
+    private ArrayList<TestItem> testItems;
+    private TestListAdapter testListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        context = this;
 
         button = findViewById(R.id.button);
         textView2 = findViewById(R.id.textView2);
         listView = findViewById(R.id.listView);
+        linearLayout = findViewById(R.id.linearLayout);
 
         // 데이터 저장 list
-        List<String> list = new ArrayList<>();
-
+//        List<String> list = new ArrayList<>();
+        testItems = new ArrayList<>();
         // 리스트뷰와 리스트를 연결하기 위해 사용되는 어댑터.
         // 어댑터에 리스트를 먼저 담는다.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, list);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.custom_list_item, list);
 
         // 리스트뷰에 어댑터를 지정해준다.
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
 
         // 리스뷰에 보여질 아이템을 추가
-        list.add("사과");
-        list.add("배");
-        list.add("마늘");
-        list.add("귤");
+        testItems.add(new TestItem("타이틀"));
+        testItems.add(new TestItem("사과"));
+        testItems.add(new TestItem("배"));
+        testItems.add(new TestItem("바나나"));
+        testItems.add(new TestItem("마늘"));
+        testItems.add(new TestItem("귤"));
 
+        testListAdapter = new TestListAdapter(context, testItems, new Callback() {
+            @Override
+            public void run(Object result) {
+                textView2.setText(""+result);
+                //Toast.makeText(context, ""+result,Toast.LENGTH_SHORT).show();
+            }
+        });
+        listView.setAdapter(testListAdapter);
+
+        /*
         button.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
+
                 final List<String> selectedItems = new ArrayList<>();
 
                 //리스트뷰에서 선택된 아이템의 목록을 가져온다.
@@ -86,7 +106,9 @@ public class MainActivity2 extends AppCompatActivity {
 
                 AlertDialog alertDialogObject = dialogBuilder.create();
                 alertDialogObject.show();
+
             }
         });
+        */
     }
 }
