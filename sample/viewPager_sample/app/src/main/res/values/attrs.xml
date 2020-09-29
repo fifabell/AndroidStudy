@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PagerIndicator">
+        <attr name="duration" format="integer"/>
+        <attr name="marginBetweenDot" format="integer"/>
+        <attr name="selectScale" foramt="float"/>
+        <attr name="defaultScale" foramt="float"/>
+        <attr name="selectImage" foramt="drawable"/>
+        <attr name="defaultImage" foramt="drawable"/>
+    </declare-styleable>
+</resources>

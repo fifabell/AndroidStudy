@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">broadcast_sample</string>
+    <string name="broadcast_exam">example.test.broadcast</string>
+</resources>

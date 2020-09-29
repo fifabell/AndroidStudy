@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".viewpager_sample.viewpager_sample.MainActivity">
 
     <LinearLayout
         android:id="@+id/ll"
@@ -31,6 +31,12 @@
             android:layout_weight="1"
             android:text="third"/>
     </LinearLayout>
+
+    <include
+        android:id="@+id/view_indi"
+        layout="@layout/view_indi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"
