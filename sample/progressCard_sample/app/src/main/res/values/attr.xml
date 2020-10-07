@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressCard">
+        <attr name="type" format="integer" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="gradientStartColor" format="color" />
+        <attr name="gradientEndColor" format="color" />
+    </declare-styleable>
+</resources>

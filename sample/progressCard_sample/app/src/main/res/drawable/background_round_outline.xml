@@ -1,0 +1,18 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="5dp"
+                android:color="@color/colorProgressBackground"></stroke>
+            <corners android:radius="3dp"></corners>
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="5dp"
+                android:color="@color/colorProgressBackground"></stroke>
+        </shape>
+    </item>
+</layer-list>

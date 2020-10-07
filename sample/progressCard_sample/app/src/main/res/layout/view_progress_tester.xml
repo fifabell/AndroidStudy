@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:onClick="onClickTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type 0" />
+
+
+            <com.example.test01.ProgressCard
+                android:id="@+id/test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:type="0"
+                ></com.example.test01.ProgressCard>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type 1" />
+
+            <com.example.test01.ProgressCard
+                android:id="@+id/test1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:type="1"
+                app:animationDuration="3000"
+                app:gradientEndColor="@color/colorGray"
+                app:gradientStartColor="@color/colorPrimaryDark"></com.example.test01.ProgressCard>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type 2" />
+
+            <com.example.test01.ProgressCard
+                android:id="@+id/test2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:type="2"></com.example.test01.ProgressCard>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type 3" />
+
+            <com.example.test01.ProgressCard
+                android:id="@+id/test3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:type="3"></com.example.test01.ProgressCard>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type 4" />
+
+            <com.example.test01.ProgressCard
+                android:id="@+id/test4"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:type="4"></com.example.test01.ProgressCard>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type 5" />
+
+            <com.example.test01.ProgressCard
+                android:id="@+id/test5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:type="5"></com.example.test01.ProgressCard>
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                app:srcCompat="@drawable/dot_default"></ImageView>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                app:srcCompat="@drawable/dot_selected"></ImageView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
