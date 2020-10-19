@@ -1,6 +1,7 @@
 package com.example.recyclerview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private ArrayList<RecyclerItem> mData = null;
+    ConstraintLayout layoutParent;
+
 
     public RecyclerAdapter(ArrayList<RecyclerItem> mList) {
         mData = mList;
@@ -55,12 +59,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView title;
         TextView desc;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             icon = itemView.findViewById(R.id.icon);
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
+
+            layoutParent = itemView.findViewById(R.id.layoutParent);
+            layoutParent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        RecyclerItem item = mData.get(pos);
+                        Log.d("ttt_title",item.getTitleStr());
+                        Log.d("ttt_desc",item.getDescStr());
+                    }
+                }
+            });
         }
     }
+
+
 }
