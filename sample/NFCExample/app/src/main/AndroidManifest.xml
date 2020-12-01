@@ -3,7 +3,7 @@
     package="com.example.nfcexample">
 
     <uses-permission android:name="android.permission.NFC"></uses-permission>
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
 
 
     <application
@@ -23,10 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter> <!-- 추가할 intent-filter -->
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain" />
-                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
             </intent-filter>
 
             <!-- 추가할 meta-data -->
