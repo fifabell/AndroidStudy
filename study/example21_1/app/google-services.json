@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "858930116045",
+    "project_id": "facechk-89737",
+    "storage_bucket": "facechk-89737.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858930116045:android:5c1c1f523052c14c378084",
+        "android_client_info": {
+          "package_name": "com.example.facechk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858930116045-lscv3eop5metmq20391tng4h9eprlf21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.facechk",
+            "certificate_hash": "919f5e4087a2985b55d14fd20b057f20e32ca2cb"
+          }
+        },
+        {
+          "client_id": "858930116045-b33ufpcqa0vbdg48gg9en8g762nhlo6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR6-QnUlSTRDhzqWUXcx_fsOqqGKrXHXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858930116045-b33ufpcqa0vbdg48gg9en8g762nhlo6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
