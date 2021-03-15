@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new RecyclerAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 
+
+
         // 리사이클러뷰에 LinearlayoutManager 지정 (vertical)
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
